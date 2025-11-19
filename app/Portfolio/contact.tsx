@@ -9,7 +9,7 @@ export default function ContactSection() {
 
   return (
     <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4 text-center">Kontakta oss</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Kontakta mig</h1>
 
       <div className="flex justify-center gap-4 mb-6">
         <button
