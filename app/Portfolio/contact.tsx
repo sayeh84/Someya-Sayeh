@@ -1,69 +1,37 @@
 'use client'
 
-export default function contact() {
+import { useState } from 'react'
+import SendEmail from './sendEmail'
+import SendWhatsapp from './sendWhatsapp'
+
+export default function ContactSection() {
+  const [selected, setSelected] = useState('email')
+
   return (
-    <>
-      <section id="contact" className="max-w-3xl mx-auto px-6 py-16">
-        <h2 className="text-2xl font-semibold">Kontakt</h2>
-        <p className="text-muted mt-2">
-          Vill du arbeta tillsammans eller bara säga hej? Skicka ett meddelande.
-        </p>
+    <div className="p-6 max-w-xl mx-auto">
+      <h1 className="text-2xl font-bold mb-4 text-center">Kontakta oss</h1>
 
-        <form
-          className="mt-6 grid grid-cols-1 gap-4"
-          onSubmit={(e) => {
-            e.preventDefault()
-            alert('Skickat — ersätt med verklig hantering')
-          }}
+      <div className="flex justify-center gap-4 mb-6">
+        <button
+          onClick={() => setSelected('whatsapp')}
+          className={`px-4 py-2 rounded font-semibold ${
+            selected === 'whatsapp' ? 'bg-green-500 text-white' : 'bg-gray-200'
+          }`}
         >
-          <label className="sr-only" htmlFor="name">
-            Namn
-          </label>
-          <input
-            id="name"
-            name="name"
-            required
-            placeholder="Ditt namn"
-            className="input"
-          />
+          WhatsAppss
+        </button>
+        <button
+          onClick={() => setSelected('email')}
+          className={`px-4 py-2 rounded font-semibold ${
+            selected === 'email' ? 'bg-blue-500 text-white' : 'bg-gray-200'
+          }`}
+        >
+          E-mailss
+        </button>
+      </div>
 
-          <label className="sr-only" htmlFor="email">
-            E-post
-          </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            required
-            placeholder="din@email.se"
-            className="input"
-          />
-
-          <label className="sr-only" htmlFor="message">
-            Meddelande
-          </label>
-          <textarea
-            id="message"
-            name="message"
-            rows={5}
-            required
-            placeholder="Skriv ditt meddelande här..."
-            className="input resize-y"
-          />
-
-          <div className="flex items-center justify-between">
-            <button type="submit" className="btn-primary px-5 py-2 rounded-md">
-              Skicka
-            </button>
-            <p className="text-xs text-muted">
-              Eller maila:{' '}
-              <a href="mailto:hello@exempel.se" className="link-focus">
-                hello@exempel.se
-              </a>
-            </p>
-          </div>
-        </form>
-      </section>
-    </>
+      {selected === 'whatsapp' && <SendWhatsapp />}
+      {selected === 'email' && <SendEmail />}
+    </div>
   )
 }
