@@ -18,7 +18,7 @@ export default function ContactSection() {
             selected === 'whatsapp' ? 'bg-green-500 text-white' : 'bg-gray-200'
           }`}
         >
-          WhatsAppss
+          WhatsApp
         </button>
         <button
           onClick={() => setSelected('email')}
@@ -26,7 +26,7 @@ export default function ContactSection() {
             selected === 'email' ? 'bg-blue-500 text-white' : 'bg-gray-200'
           }`}
         >
-          E-mailss
+          E-mail
         </button>
       </div>
 
