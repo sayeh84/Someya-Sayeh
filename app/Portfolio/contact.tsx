@@ -20,18 +20,9 @@ export default function ContactSection() {
         >
           WhatsApp
         </button>
-        <button
-          onClick={() => setSelected('email')}
-          className={`px-4 py-2 rounded font-semibold ${
-            selected === 'email' ? 'bg-blue-500 text-white' : 'bg-gray-200'
-          }`}
-        >
-          E-mail
-        </button>
       </div>
 
       {selected === 'whatsapp' && <SendWhatsapp />}
-      {selected === 'email' && <SendEmail />}
     </div>
   )
 }

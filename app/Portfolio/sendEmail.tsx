@@ -6,11 +6,12 @@ export default function SendEmailPage() {
   const [to, setTo] = useState('')
   const [subject, setSubject] = useState('')
   const [message, setMessage] = useState('')
+  const [feedback, setFeedback] = useState('')
 
   async function sendEmail() {
-    if (!to.trim()) return alert('Du måste ange mottagarens e-post!')
-    if (!subject.trim()) return alert('Du måste ange ett ämne!')
-    if (!message.trim()) return alert('Du måste skriva ett meddelande!')
+    if (!to.trim()) return setFeedback('Du måste ange mottagarens e-post!')
+    if (!subject.trim()) return setFeedback('Du måste ange ett ämne!')
+    if (!message.trim()) return setFeedback('Du måste skriva ett meddelande!')
 
     const res = await fetch('/api/send-email', {
       method: 'POST',
@@ -23,8 +24,7 @@ export default function SendEmailPage() {
     })
 
     const data = await res.json()
-    console.log(data)
-    alert('E-mail skickat!')
+    setFeedback('E-mail skickat!')
   }
 
   return (
@@ -64,6 +64,28 @@ export default function SendEmailPage() {
       >
         Skicka e-mail
       </button>
+      <div
+        style={{
+          marginTop: 20,
+          padding: '10px 15px',
+          borderRadius: 8,
+          fontWeight: 'bold',
+          backgroundColor: feedback
+            ? feedback.includes('skickat')
+              ? '#d1fae5'
+              : '#fee2e2'
+            : 'transparent',
+          color: feedback
+            ? feedback.includes('skickat')
+              ? '#065f46'
+              : '#991b1b'
+            : 'inherit',
+          border: feedback ? '1px solid #ccc' : 'none',
+          transition: '0.3s ease',
+        }}
+      >
+        {feedback}
+      </div>
     </div>
   )
 }

@@ -4,10 +4,11 @@ import { useState } from 'react'
 
 export default function SendWhatsAppPage() {
   const [message, setMessage] = useState('')
+  const [feedback, setFeedback] = useState('')
 
   async function sendWhatsApp() {
     if (!message.trim()) {
-      alert('Skriv ett meddelande först!')
+      setFeedback('Skriv ett meddelande först!')
       return
     }
 
@@ -21,8 +22,7 @@ export default function SendWhatsAppPage() {
     })
 
     const data = await res.json()
-    console.log(data)
-    alert('WhatsApp skickat!')
+    setFeedback('WhatsApp skickat!')
   }
 
   return (
@@ -35,13 +35,38 @@ export default function SendWhatsAppPage() {
         placeholder="Skriv ditt meddelande här..."
         style={{ width: '100%', height: 120, padding: 10 }}
       />
-
       <button
         onClick={sendWhatsApp}
-        style={{ padding: '10px 20px', marginTop: 20 }}
+        style={{
+          padding: '10px 20px',
+          marginTop: 20,
+          border: '1px solid black',
+        }}
       >
         Skicka WhatsApp
       </button>
+      <div
+        style={{
+          marginTop: 20,
+          padding: '10px 15px',
+          borderRadius: 8,
+          fontWeight: 'bold',
+          backgroundColor: feedback
+            ? feedback.includes('skickat')
+              ? '#d1fae5' // GRÖN för success
+              : '#fee2e2' // RÖD för error
+            : 'transparent',
+          color: feedback
+            ? feedback.includes('skickat')
+              ? '#065f46'
+              : '#991b1b'
+            : 'inherit',
+          border: feedback ? '1px solid #ccc' : 'none',
+          transition: '0.3s ease',
+        }}
+      >
+        {feedback}
+      </div>
     </div>
   )
 }
