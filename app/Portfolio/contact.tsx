@@ -9,7 +9,7 @@ export default function ContactSection() {
 
   return (
     <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4 text-center">Kontakta mig</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Kontakta oss</h1>
 
       <div className="flex justify-center gap-4 mb-6">
         <button
@@ -20,9 +20,18 @@ export default function ContactSection() {
         >
           WhatsApp
         </button>
+        <button
+          onClick={() => setSelected('email')}
+          className={`px-4 py-2 rounded font-semibold ${
+            selected === 'email' ? 'bg-blue-500 text-white' : 'bg-gray-200'
+          }`}
+        >
+          E-mail
+        </button>
       </div>
 
       {selected === 'whatsapp' && <SendWhatsapp />}
+      {selected === 'email' && <SendEmail />}
     </div>
   )
 }

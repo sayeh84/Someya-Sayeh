@@ -25,48 +25,37 @@ export default function SendWhatsAppPage() {
     setFeedback('WhatsApp skickat!')
   }
 
+  const isSuccess = feedback.includes('skickat')
+
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Skicka WhatsApp</h1>
+    <div className="p-5">
+      <h1 className="text-2xl font-bold mb-4">Skicka WhatsApp</h1>
 
       <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         placeholder="Skriv ditt meddelande här..."
-        style={{ width: '100%', height: 120, padding: 10 }}
+        className="w-full h-32 p-3 border rounded-md"
       />
+
       <button
         onClick={sendWhatsApp}
-        style={{
-          padding: '10px 20px',
-          marginTop: 20,
-          border: '1px solid black',
-        }}
+        className="mt-5 px-5 py-2 border border-black rounded-md hover:bg-gray-100 transition"
       >
         Skicka WhatsApp
       </button>
-      <div
-        style={{
-          marginTop: 20,
-          padding: '10px 15px',
-          borderRadius: 8,
-          fontWeight: 'bold',
-          backgroundColor: feedback
-            ? feedback.includes('skickat')
-              ? '#d1fae5' // GRÖN för success
-              : '#fee2e2' // RÖD för error
-            : 'transparent',
-          color: feedback
-            ? feedback.includes('skickat')
-              ? '#065f46'
-              : '#991b1b'
-            : 'inherit',
-          border: feedback ? '1px solid #ccc' : 'none',
-          transition: '0.3s ease',
-        }}
-      >
-        {feedback}
-      </div>
+
+      {feedback && (
+        <div
+          className={`mt-5 p-3 rounded-md font-bold border transition ${
+            isSuccess
+              ? 'bg-emerald-100 text-emerald-800'
+              : 'bg-red-100 text-red-800'
+          }`}
+        >
+          {feedback}
+        </div>
+      )}
     </div>
   )
 }
